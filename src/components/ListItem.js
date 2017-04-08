@@ -1,6 +1,6 @@
 //import
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card, CardSection } from './common';
 
 //more styles
@@ -18,25 +18,27 @@ const moreStyles = StyleSheet.create({
 	}
 });
 
-const ListItem = ({ item }) => {
-	console.log(item);
-
+const ListItem = ({ item, navigator }) => {
 	const { thumbnail, author } = item.data;
 	const { itemStyle, heading, smallItem } = moreStyles;
 	return (
     	<Card>
-    		<CardSection>
-    			<View style={itemStyle} >
-					<Image
-			          style={{width: 100, height: 100}}
-			          source={{uri: thumbnail}}
-			        />
-			        <Text style={[heading, smallItem]}>Author:-</Text>
-		      	<Text style={smallItem}>{author}</Text>
-		      	</View>
-		    </CardSection>
+    		<TouchableOpacity
+    			onPress={() => navigator.push({id: "detailedView", data: item.data})}
+    		>
+	    		<CardSection>
+	    			<View style={itemStyle} >
+						<Image
+				          style={{width: 100, height: 100}}
+				          source={{uri: thumbnail}}
+				        />
+				        <Text style={[heading, smallItem]}>Author:-</Text>
+			      	<Text style={smallItem}>{author}</Text>
+			      	</View>
+			    </CardSection>
+			</TouchableOpacity>
 	    </Card>
-  );
+	  );
 };
 
 export default ListItem;
