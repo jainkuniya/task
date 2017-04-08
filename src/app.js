@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Header } from './components/common';
-import RedditList from './components/RedditList';
+import HomePage from './components/HomePage';
 
 //create class components
 export default class App extends Component {
@@ -10,7 +10,7 @@ export default class App extends Component {
 		return (
 			<View style={{ flex: 1 }}>
 				<Header headerText="Reddit" />
-				<RedditList />
+				<HomePage />
 			</View>
 		);
 	}
