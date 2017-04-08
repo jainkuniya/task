@@ -1,26 +1,20 @@
 //import
 import React from 'react';
 import { 
-	View, 
 	Text, 
 	Image, 
 	StyleSheet, 
 	TouchableOpacity,
 	ScrollView,
-	Linking } from 'react-native';
-import { CardSection } from './common';
+	Linking 
+} from 'react-native';
+import { CardSection, SubItems } from './common';
 
 //more styles
 const moreStyles = StyleSheet.create({
-	itemStyle: {
-		alignSelf: 'stretch'
-	},
-	heading: {
-		fontSize: 18,
-		color: 'black',
-	},
-	smallItem: {
-		margin: 4,
+	imageStyle: {
+		alignSelf: 'stretch',
+		height: 200,
 	},
 	button: {
 		borderWidth: 1,
@@ -33,34 +27,49 @@ const moreStyles = StyleSheet.create({
 });
 
 const ListItem = ({ data, navigator }) => {
-	const { url, author, permalink } = data;
-	const { itemStyle, heading, smallItem, button } = moreStyles;
+	const { 
+		url, 
+		author, 
+		permalink, 
+		title,
+		created 
+	} = data;
+	const date = new Date(created);
+	const { imageStyle, button } = moreStyles;
 	return (
-    	<ScrollView>
-    		<CardSection>
-	    			<View style={itemStyle} >
-						<Image
-				          style={{height: 200}}
-				          source={{uri: url}}
-				        />
-				    <Text style={[heading, smallItem]}>Author:-</Text>
-			      	<Text style={smallItem}>{author}</Text>
-			      	</View>
+		<ScrollView>
+			<CardSection>	    			
+				<Image
+					style={imageStyle}
+					source={{ uri: url }}
+				/>
+				<SubItems
+					textOne='Author'
+					textTwo={author}
+				/>
+				<SubItems
+					textOne='Title'
+					textTwo={title}
+				/>
+				<SubItems
+					textOne='Date'
+					textTwo={date.toLocaleString()}
+				/>
 			</CardSection>
 			<TouchableOpacity
-    			onPress={() => Linking.openURL('https://www.reddit.com' + permalink)}
-    			style={button}
-    		>
-    			<Text>Open in Browser</Text>
+				onPress={() => Linking.openURL('https://www.reddit.com'.concat(permalink))}
+				style={button}
+			>
+				<Text>Open in Browser</Text>
 			</TouchableOpacity>
-    		<TouchableOpacity
-    			onPress={() => navigator.pop()}
-    			style={button}
-    		>
-    			<Text>Go Back</Text>
+			<TouchableOpacity
+				onPress={() => navigator.pop()}
+				style={button}
+			>
+				<Text>Go Back</Text>
 			</TouchableOpacity>
-	    </ScrollView>
-	  );
+		</ScrollView>
+	);
 };
 
 export default ListItem;
