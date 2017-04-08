@@ -1,6 +1,7 @@
 //Import libraries
 import React, { Component } from 'react';
 import { View, ListView, Text } from 'react-native';
+import ListItem from './ListItem';
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
@@ -14,7 +15,7 @@ export default class RedditList extends Component {
 			<View>
 				<ListView
 					dataSource={dataSource}
-					renderRow={(rowData) => <Text>Reddit Data Item</Text>}
+					renderRow={(rowData) => <ListItem item={rowData} />}
 				/>
 			</View>
 		);
