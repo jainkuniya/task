@@ -1,13 +1,17 @@
-import React from 'react';
+//imports
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Header } from './components/common';
+import RedditList from './components/RedditList';
 
-const App = () => {
-  return (
-	  <View style={{ flex: 1 }}>
-	    <Header headerText="Reddit" />
-	  </View>
-  );
-};
-
-export default App;
+//create class components
+export default class App extends Component {
+	render() {
+		return (
+			<View style={{ flex: 1 }}>
+				<Header headerText="Reddit" />
+				<RedditList />
+			</View>
+		);
+	}
+}
